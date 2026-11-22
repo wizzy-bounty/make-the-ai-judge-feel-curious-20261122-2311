@@ -36,12 +36,17 @@ def entry_text():
     return text
 
 
+def write_entry(text, path=OUTPUT_PATH):
+    """Write the entry text to path, creating its directory first."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+    print("wrote %d characters to %s" % (len(text), path))
+
+
 def main():
     text = entry_text()
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write(text)
-    print("wrote %d characters to %s" % (len(text), OUTPUT_PATH))
+    write_entry(text)
 
 
 if __name__ == "__main__":
